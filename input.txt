@@ -1,0 +1,10 @@
+# Input File
+# 
+# Process details must be given in the specified order
+# process_id arrival_time burst_time
+#
+# Add process details after this line
+0 0 5
+1 1 3
+2 2 8
+3 3 6
