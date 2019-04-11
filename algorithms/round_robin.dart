@@ -1,5 +1,3 @@
 import '../models/algorithm.dart';
 
-class RR implements Algorithm{
-
-}
+class RR extends Algorithm {}

@@ -1,10 +1,12 @@
 # Input File
 # 
+# Add comments by placing '#' at the start of the line
+#
 # Process details must be given in the specified order
 # process_id arrival_time burst_time
 #
 # Add process details after this line
+3 1 6
 0 0 5
-1 1 3
-2 2 8
-3 3 6
+2 1 5
+1 1 5

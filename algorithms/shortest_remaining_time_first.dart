@@ -1,5 +1,3 @@
 import '../models/algorithm.dart';
 
-class SRTF implements Algorithm{
-
-}
+class SRTF extends Algorithm {}
