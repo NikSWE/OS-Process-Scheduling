@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'process.dart';
 
 class ProcessQueue extends Iterable {
+  /// Queue to manage processes in the system
   Queue<Process> _queue;
 
   ProcessQueue() {
@@ -13,6 +14,7 @@ class ProcessQueue extends Iterable {
     _queue = Queue.from(processList);
   }
 
+  /// Adds a process to process queue
   void addProcess(Process process) {
     _queue.add(process);
   }
@@ -23,10 +25,17 @@ class ProcessQueue extends Iterable {
     }
   }
 
+  /// Removes a process from the process queue
   void removeProcess(Process process) {
     _queue.remove(process);
   }
 
+  /// Copy the contents of one process queue to another
+  void copyProcessQueue(ProcessQueue processQueue){
+    _queue = Queue.from(processQueue);
+  }
+
+  /// Converts process queue to List of processes
   List<Process> convertToList() {
     return _queue.toList();
   }
