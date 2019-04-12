@@ -42,21 +42,17 @@ abstract class Algorithm {
         if (a.burst_time < b.burst_time)
           return -1;
         else if (a.burst_time == b.burst_time) {
-          if (a.arrival_time > b.arrival_time)
-            return 1;
-          else
-            return 0;
+          return 0;
         } else
           return 1;
       });
       return true;
     } else if (sortBasis == 'both') {
       processList.sort((Process a, Process b) {
-        if (a.arrival_time < b.arrival_time) {
-          if (a.burst_time < b.burst_time) return -1;
-          //TODO: work on this else if case
-        } else if (a.arrival_time == b.arrival_time) {
-          if (a.process_id > b.process_id)
+        if (a.arrival_time < b.arrival_time)
+          return -1;
+        else if (a.arrival_time == b.arrival_time) {
+          if (a.burst_time > b.burst_time)
             return 1;
           else
             return 0;
