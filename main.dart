@@ -4,7 +4,7 @@
 /// --------------------
 /// This project simulates scheduling algorithms used by Operating Systems
 /// to resolve which process should be assigned to CPU.
-/// 
+///
 /// Scheduling algorithms used are mentioned below
 /// 'First Come First Serve (FCFS)'
 /// 'Shortest Job First (SJF)'
@@ -25,10 +25,20 @@ void main() {
   // Contains the processes given in the file
   List<Process> processList = [];
 
+  // Time quantum for round robin algorithm
+  int time_quantum = 1;
+
   // Add processes to processList
   for (String content in contents) {
     // ignore all the comments mentioned in the file
     if (content.contains('#')) continue;
+
+    // get the time quantum from the file
+    if (content.contains('RR')) {
+      time_quantum = int.parse(content.split(' ')[1]);
+      continue;
+    }
+
     // extract the process information from the content
     // by splitting it on 'space'.
     // the list contains 'process_id', 'arrival_time', 'burst_time'
@@ -46,7 +56,7 @@ void main() {
   } else {
     // executing scheduling algorithms
     String bestAlgorithm; // best algorithm to implement for the given processes
-    String worstAlgorithm;  // worst algorithm to implement for the given processes
+    String worstAlgorithm; // worst algorithm to implement for the given processes
     FCFS fcfs = FCFS(processList);
     fcfs.Execute();
     fcfs.printGanttChart();
