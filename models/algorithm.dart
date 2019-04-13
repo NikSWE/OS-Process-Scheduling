@@ -21,15 +21,23 @@ abstract class Algorithm {
   /// arrival time of all the processes
   List<int> arrivalTimeList;
 
+  /// burst time of all the processes
+  List<int> burstTimeList;
+
   Algorithm();
 
   Algorithm.fromProcessList(List<Process> processList) {
     this.processList = List.from(processList);
-    this.arrivalTimeList = [];
+    this.arrivalTimeList = List<int>();
+    this.burstTimeList = List<int>();
+    readyQueue = ProcessQueue();
+    runningQueue = ProcessQueue();
     for (Process process in this.processList) {
       arrivalTimeList.add(process.arrival_time);
+      burstTimeList.add(process.burst_time);
     }
     arrivalTimeList.sort();
+    burstTimeList.sort();
   }
 
   /// sort process list on the basis of `'arrival', 'burst', 'both'`
@@ -66,10 +74,10 @@ abstract class Algorithm {
 
   /// generate Gantt Chart for the given process list
   void printGanttChart() {
-    if (processList.isNotEmpty) {
+    if (this.processList.isNotEmpty) {
       print('************************* Gantt Chart *************************');
       print('P_ID\tP_AT\tP_BT\tP_TAT\tP_WT');
-      processList.forEach((Process process) {
+      this.processList.forEach((Process process) {
         process.printProcessInfo();
       });
       print('***************************************************************');

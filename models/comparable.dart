@@ -16,7 +16,10 @@ int compareOnBurst(Process a, Process b) {
   if (a.burst_time < b.burst_time)
     return -1;
   else if (a.burst_time == b.burst_time) {
-    return 0;
+    if (a.arrival_time > b.arrival_time)
+      return 1;
+    else
+      return 0;
   } else
     return 1;
 }

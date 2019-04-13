@@ -14,6 +14,7 @@
 import 'dart:io';
 
 import 'models/process.dart';
+import 'models/algorithm.dart';
 import 'algorithms/scheduling_algorithms.dart';
 
 void main() {
@@ -55,10 +56,17 @@ void main() {
     print('Input file is empty!'); // Prompt user with the error message
   } else {
     // executing scheduling algorithms
-    String bestAlgorithm; // best algorithm to implement for the given processes
-    String worstAlgorithm; // worst algorithm to implement for the given processes
+    Algorithm bestAlgorithm; // best algorithm to implement for the given processes
+    Algorithm worstAlgorithm; // worst algorithm to implement for the given processes
     FCFS fcfs = FCFS(processList);
-    fcfs.Execute();
-    fcfs.printGanttChart();
+    SJF sjf = SJF(processList);
+    sjf.Execute();
+    // fcfs.Execute();
+    // print(fcfs.avg_waiting_time);
+    // print(sjf.avg_waiting_time);
+    // fcfs.printGanttChart();
+    // print(fcfs. == sjf.processList);
+    sjf.printGanttChart();
+    
   }
 }

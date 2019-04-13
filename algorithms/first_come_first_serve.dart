@@ -6,8 +6,6 @@ class FCFS extends Algorithm {
   FCFS(List<Process> processList) : super.fromProcessList(processList) {
     // sort the process list on the basis of arrival time
     sortProcessList('arrival');
-    readyQueue = ProcessQueue();
-    runningQueue = ProcessQueue();
   }
 
   @override
