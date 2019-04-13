@@ -15,7 +15,7 @@ class FCFS extends Algorithm {
     int current_time;
     for (int arrival_time in arrivalTimeList) {
       readyQueue.addProcessFromIterable(processList.where((Process process) {
-        if (process.arrival_time == arrival_time && process.burst_time != 0)
+        if (process.arrival_time == arrival_time && process.burst_time != 0 && !readyQueue.contains(process))
           return true;
         else
           return false;
@@ -34,11 +34,5 @@ class FCFS extends Algorithm {
       processList = [];
     } else
       processList = runningQueue.convertToList();
-  }
-
-  /// Prints the Gantt Chart for the implemented algorithm
-  void printGanttChart() {
-    if (processList.isNotEmpty)
-      super.GanttChart(processList);
   }
 }
