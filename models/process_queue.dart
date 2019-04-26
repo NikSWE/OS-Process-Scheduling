@@ -26,8 +26,8 @@ class ProcessQueue extends Iterable {
   }
 
   /// Removes a process from the process queue
-  void removeProcess(Process process) {
-    _queue.remove(process);
+  bool removeProcess(Process process) {
+    return _queue.remove(process);
   }
 
   /// Copy the contents of one process queue to another

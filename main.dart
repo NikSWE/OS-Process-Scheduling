@@ -64,7 +64,10 @@ void main() {
   else {
     // executing scheduling algorithms
     FCFS fcfs = FCFS(processList);  // create an object of FCFS algorithm
+    SJF sjf = SJF(processList); // create an object of SJF algorithm
     fcfs.Execute();
     fcfs.printGanttChart();
+    sjf.Execute();
+    sjf.printGanttChart();
   }
 }
