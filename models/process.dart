@@ -2,6 +2,7 @@ class Process {
   int process_id; // process id of a process
   int arrival_time; // arrival time of a process
   int burst_time; // burst time of a process
+  int temp_burst_time; // temp burst time used in SRTF
   int turnaround_time; // turnaround time of a process
   int waiting_time; // waiting time of a process
   int completion_time; // completion time of a process

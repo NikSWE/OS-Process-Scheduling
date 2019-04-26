@@ -65,9 +65,8 @@ void main() {
     // executing scheduling algorithms
     FCFS fcfs = FCFS(processList);  // create an object of FCFS algorithm
     SJF sjf = SJF(processList); // create an object of SJF algorithm
-    fcfs.Execute();
-    fcfs.printGanttChart();
-    sjf.Execute();
-    sjf.printGanttChart();
+    SRTF srtf = SRTF(processList); // create an object of SRTF algorithm
+    srtf.Execute();
+    srtf.printGanttChart();
   }
 }

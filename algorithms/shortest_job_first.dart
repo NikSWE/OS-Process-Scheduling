@@ -1,7 +1,8 @@
+import 'dart:collection';
+
 import '../models/process.dart';
 import '../models/algorithm.dart';
 import '../models/comparable.dart';
-import 'dart:collection';
 
 class SJF extends Algorithm {
   SJF(List<Process> processList) : super.fromProcessList(processList) {
