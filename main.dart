@@ -14,27 +14,31 @@
 import 'dart:io';
 
 import 'models/process.dart';
-import 'models/algorithm.dart';
 import 'algorithms/scheduling_algorithms.dart';
 
 void main() {
   // Get the input file reference
-  // To load 'testcases.txt' replace it with 'input.txt'
+  // To load testcases.txt instead of input.txt
+  // replace input.txt with testcases.txt
   File inputFile = File('input.txt');
+
+  // reading the contents of the inputFile line by line synchronously
   List<String> contents = inputFile.readAsLinesSync();
 
-  // Contains the processes given in the file
-  List<Process> processList = [];
+  // Contains the processes given in the inputFile
+  List<Process> processList = List<Process>();
 
   // Time quantum for round robin algorithm
+  // as mentioned in the inputFile
+  // by default it is set to 1
   int time_quantum = 1;
 
-  // Add processes to processList
+  // Adding processes to processList
   for (String content in contents) {
-    // ignore all the comments mentioned in the file
-    if (content.contains('#')) continue;
+    // ignore all the comments mentioned in the inputFile
+    if (content.startsWith('#')) continue;
 
-    // get the time quantum from the file
+    // get the time quantum from the inputFile
     if (content.contains('RR')) {
       time_quantum = int.parse(content.split(' ')[1]);
       continue;
@@ -42,31 +46,25 @@ void main() {
 
     // extract the process information from the content
     // by splitting it on 'space'.
-    // the list contains 'process_id', 'arrival_time', 'burst_time'
+    // the processInfo contains 'process_id', 'arrival_time', 'burst_time'
     List<String> processInfo = content.split(' ');
-    // create a new process from the process info
-    // add the process to process list
+
+    // create a new process from the process information
+    // and add this process to process list
     processList.add(Process.fromProcessInfo(processInfo));
   }
+
   // Check input file for process details
   // if no process are given by user, display an error message
-  // else execute the scheduling algorithms
-  if (processList.length == 0) {
+  if (processList.isEmpty) {
     // Process List is empty
     print('Input file is empty!'); // Prompt user with the error message
-  } else {
+  }
+  // else execute the scheduling algorithms
+  else {
     // executing scheduling algorithms
-    Algorithm bestAlgorithm; // best algorithm to implement for the given processes
-    Algorithm worstAlgorithm; // worst algorithm to implement for the given processes
-    FCFS fcfs = FCFS(processList);
-    SJF sjf = SJF(processList);
-    sjf.Execute();
-    // fcfs.Execute();
-    // print(fcfs.avg_waiting_time);
-    // print(sjf.avg_waiting_time);
-    // fcfs.printGanttChart();
-    // print(fcfs. == sjf.processList);
-    sjf.printGanttChart();
-    
+    FCFS fcfs = FCFS(processList);  // create an object of FCFS algorithm
+    fcfs.Execute();
+    fcfs.printGanttChart();
   }
 }

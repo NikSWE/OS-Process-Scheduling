@@ -1,6 +1,5 @@
-import '../models/algorithm.dart';
 import '../models/process.dart';
-import '../models/process_queue.dart';
+import '../models/algorithm.dart';
 
 class FCFS extends Algorithm {
   FCFS(List<Process> processList) : super.fromProcessList(processList) {
@@ -9,10 +8,24 @@ class FCFS extends Algorithm {
   }
 
   @override
+  void printGanttChart() {
+    if (processList.isNotEmpty) {
+      print('************************* Gantt Chart *************************');
+      print('P_ID\tP_AT\tP_BT\tP_TAT\tP_WT');
+      processList.forEach((Process process) {
+        process.printProcessInfo();
+      });
+      print('***************************************************************');
+      print('Avg Turnaround Time = ${avg_turnaround_time}\tAvg Waiting Time = ${avg_waiting_time}');
+      print('***************************************************************');
+    }
+  }
+
+  @override
   void Execute() {
-    int current_time;
     for (int arrival_time in arrivalTimeList) {
       readyQueue.addProcessFromIterable(processList.where((Process process) {
+        // find all the process's where arrival time is same, burst time is not 0 and ready queue doen't already contain it
         if (process.arrival_time == arrival_time && process.burst_time != 0 && !readyQueue.contains(process))
           return true;
         else
@@ -20,7 +33,7 @@ class FCFS extends Algorithm {
       }));
     }
     runningQueue.copyProcessQueue(readyQueue);
-    current_time = arrivalTimeList[0];
+    int current_time = arrivalTimeList[0];
     for (Process process in runningQueue) {
       current_time += process.burst_time;
       process.completion_time = current_time;

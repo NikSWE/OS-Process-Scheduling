@@ -28,8 +28,8 @@ abstract class Algorithm {
 
   Algorithm.fromProcessList(List<Process> processList) {
     this.processList = List.from(processList);
-    this.arrivalTimeList = List<int>();
-    this.burstTimeList = List<int>();
+    arrivalTimeList = List<int>();
+    burstTimeList = List<int>();
     readyQueue = ProcessQueue();
     runningQueue = ProcessQueue();
     for (Process process in this.processList) {
@@ -74,16 +74,7 @@ abstract class Algorithm {
 
   /// generate Gantt Chart for the given process list
   void printGanttChart() {
-    if (this.processList.isNotEmpty) {
-      print('************************* Gantt Chart *************************');
-      print('P_ID\tP_AT\tP_BT\tP_TAT\tP_WT');
-      this.processList.forEach((Process process) {
-        process.printProcessInfo();
-      });
-      print('***************************************************************');
-      print('Avg Turnaround Time = ${this.avg_turnaround_time}\tAvg Waiting Time = ${this.avg_waiting_time}');
-      print('***************************************************************');
-    }
+    return null;
   }
 
   /// executes the algorithm to schedule the processes in the system
