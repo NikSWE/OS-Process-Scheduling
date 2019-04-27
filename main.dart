@@ -63,10 +63,21 @@ void main() {
   // else execute the scheduling algorithms
   else {
     // executing scheduling algorithms
-    FCFS fcfs = FCFS(processList);  // create an object of FCFS algorithm
+    FCFS fcfs = FCFS(processList); // create an object of FCFS algorithm
     SJF sjf = SJF(processList); // create an object of SJF algorithm
     SRTF srtf = SRTF(processList); // create an object of SRTF algorithm
-    srtf.Execute();
-    srtf.printGanttChart();
+    RR rr = RR(processList, time_quantum); // create an object of RR algorithm
+    
+    fcfs.Execute();
+    fcfs.printGanttChart();
+
+    sjf.Execute();
+    sjf.printGanttChart();
+
+    // srtf.Execute();
+    // srtf.printGanttChart();
+
+    rr.Execute();
+    rr.printGanttChart();
   }
 }

@@ -16,7 +16,7 @@ class FCFS extends Algorithm {
         process.printProcessInfo();
       });
       print('***************************************************************');
-      print('Avg Turnaround Time = ${avg_turnaround_time}\tAvg Waiting Time = ${avg_waiting_time}');
+      print('Avg Turnaround Time = ${avg_turnaround_time.toStringAsFixed(3)}\tAvg Waiting Time = ${avg_waiting_time.toStringAsFixed(3)}');
       print('***************************************************************');
     }
   }

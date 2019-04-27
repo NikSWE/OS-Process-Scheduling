@@ -21,7 +21,7 @@ class SRTF extends Algorithm {
         process.printProcessInfo();
       });
       print('***************************************************************');
-      print('Avg Turnaround Time = ${avg_turnaround_time}\tAvg Waiting Time = ${avg_waiting_time}');
+      print('Avg Turnaround Time = ${avg_turnaround_time.toStringAsFixed(3)}\tAvg Waiting Time = ${avg_waiting_time.toStringAsFixed(3)}');
       print('***************************************************************');
     }
   }
@@ -46,6 +46,7 @@ class SRTF extends Algorithm {
     List<Process> tempList = [];
     Queue<Process> tempQueue = Queue();
     tempQueue.addAll(readyQueue.cast());
+    
     while (readyQueue.isNotEmpty) {
       tempList = tempQueue.where((Process process) {
         if (process.arrival_time <= current_time && !tempList.contains(process))
