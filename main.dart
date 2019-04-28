@@ -83,46 +83,51 @@ void main() {
     alogrithmWaitTime.add(rr_wt);
 
     alogrithmWaitTime.sort();
+    String printed;
 
     if (fcfs_wt == alogrithmWaitTime[0]) {
       print("Best Algorithm : FCFS");
+      printed = "fcfs";
       FCFS temp_fcfs = FCFS(processList);
       temp_fcfs.Execute();
       temp_fcfs.printGanttChart();
     } else if (sjf_wt == alogrithmWaitTime[0]) {
       print("Best Algorithm : SJF");
+      printed = "sjf";
       SJF temp_sjf = SJF(processList);
       temp_sjf.Execute();
       temp_sjf.printGanttChart();
     } else if (srtf_wt == alogrithmWaitTime[0]) {
       print("Best Algorithm : SRTF");
+      printed = "srtf";
       SRTF temp_srtf = SRTF(processList);
       temp_srtf.Execute();
       temp_srtf.printGanttChart();
     } else if (rr_wt == alogrithmWaitTime[0]) {
       print("Best Algorithm : RR");
+      printed = "rr";
       RR temp_rr = RR(processList, time_quantum);
       temp_rr.Execute();
       temp_rr.printGanttChart();
     }
 
     print("\n\nOther Algorithms");
-    if (fcfs_wt != alogrithmWaitTime[0]) {
+    if (printed != "fcfs") {
       FCFS temp_fcfs = FCFS(processList);
       temp_fcfs.Execute();
       print("FCFS : avg_turnaround_time = ${temp_fcfs.avg_turnaround_time.toStringAsFixed(3)}\tavg_waiting_time = ${temp_fcfs.avg_waiting_time.toStringAsFixed(3)}");
     }
-    if (sjf_wt != alogrithmWaitTime[0]) {
+    if (printed != "sjf") {
       SJF temp_sjf = SJF(processList);
       temp_sjf.Execute();
       print("SJF : avg_turnaround_time = ${temp_sjf.avg_turnaround_time.toStringAsFixed(3)}\tavg_waiting_time = ${temp_sjf.avg_waiting_time.toStringAsFixed(3)}");
     }
-    if (srtf_wt != alogrithmWaitTime[0]) {
+    if (printed != "srtf") {
       SRTF temp_srtf = SRTF(processList);
       temp_srtf.Execute();
       print("SRTF : avg_turnaround_time = ${temp_srtf.avg_turnaround_time.toStringAsFixed(3)}\tavg_waiting_time = ${temp_srtf.avg_waiting_time.toStringAsFixed(3)}");
     }
-    if (rr_wt != alogrithmWaitTime[0]) {
+    if (printed != "rr") {
       RR temp_rr = RR(processList, time_quantum);
       temp_rr.Execute();
       print("RR : avg_turnaround_time = ${temp_rr.avg_turnaround_time.toStringAsFixed(3)}\tavg_waiting_time = ${temp_rr.avg_waiting_time.toStringAsFixed(3)}");
