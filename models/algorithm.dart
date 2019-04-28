@@ -2,12 +2,12 @@ import 'process.dart';
 import 'process_queue.dart';
 import 'comparable.dart';
 
-abstract class Algorithm {
+mixin Algorithm {
   /// average turnaround time taken by the algorithm
-  double _avg_turnaround_time = 0.0;
+  double _avg_turnaround_time;
 
   /// average waiting time taken by the algorithm
-  double _avg_waiting_time = 0.0;
+  double _avg_waiting_time;
 
   /// contains processes ready for execution by CPU
   ProcessQueue readyQueue;
@@ -23,22 +23,6 @@ abstract class Algorithm {
 
   /// burst time of all the processes
   List<int> burstTimeList;
-
-  Algorithm();
-
-  Algorithm.fromProcessList(List<Process> processList) {
-    this.processList = List.from(processList);
-    arrivalTimeList = List<int>();
-    burstTimeList = List<int>();
-    readyQueue = ProcessQueue();
-    runningQueue = ProcessQueue();
-    for (Process process in this.processList) {
-      arrivalTimeList.add(process.arrival_time);
-      burstTimeList.add(process.burst_time);
-    }
-    arrivalTimeList.sort();
-    burstTimeList.sort();
-  }
 
   /// sort process list on the basis of `'arrival', 'burst', 'both'`
   bool sortProcessList(String sortBasis) {
@@ -58,18 +42,20 @@ abstract class Algorithm {
 
   // Get the avg_turnaround_time for the algorithm
   double get avg_turnaround_time {
-    for (Process process in processList) {
+    _avg_turnaround_time = 0.0;
+    for (Process process in runningQueue) {
       _avg_turnaround_time += process.turnaround_time;
     }
-    return (_avg_turnaround_time /= processList.length);
+    return (_avg_turnaround_time /= runningQueue.length);
   }
 
   // Get the avg_waiting_time for the algorithm
   double get avg_waiting_time {
-    for (Process process in processList) {
+    _avg_waiting_time = 0.0;
+    for (Process process in runningQueue) {
       _avg_waiting_time += process.waiting_time;
     }
-    return (_avg_waiting_time /= processList.length);
+    return (_avg_waiting_time /= runningQueue.length);
   }
 
   /// generate Gantt Chart for the given process list

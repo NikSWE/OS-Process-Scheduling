@@ -1,8 +1,21 @@
 import '../models/process.dart';
+import '../models/process_queue.dart';
 import '../models/algorithm.dart';
 
-class FCFS extends Algorithm {
-  FCFS(List<Process> processList) : super.fromProcessList(processList) {
+class FCFS with Algorithm {
+  FCFS(List<Process> processList) {
+    this.processList = List.from(processList);
+    arrivalTimeList = List<int>();
+    burstTimeList = List<int>();
+    readyQueue = ProcessQueue();
+    runningQueue = ProcessQueue();
+    for (Process process in this.processList) {
+      arrivalTimeList.add(process.arrival_time);
+      burstTimeList.add(process.burst_time);
+    }
+    arrivalTimeList.sort();
+    burstTimeList.sort();
+
     // sort the process list on the basis of arrival time
     sortProcessList('arrival');
   }

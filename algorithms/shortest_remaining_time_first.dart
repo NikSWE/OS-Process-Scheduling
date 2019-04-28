@@ -1,13 +1,23 @@
 import 'dart:collection';
 
 import '../models/process.dart';
+import '../models/process_queue.dart';
 import '../models/algorithm.dart';
 
-class SRTF extends Algorithm {
-  SRTF(List<Process> processList) : super.fromProcessList(processList) {
-    for (Process process in super.processList) {
-      process.temp_burst_time = process.burst_time;
+class SRTF with Algorithm {
+  SRTF(List<Process> processList) {
+    this.processList = List.from(processList);
+    arrivalTimeList = List<int>();
+    burstTimeList = List<int>();
+    readyQueue = ProcessQueue();
+    runningQueue = ProcessQueue();
+    for (Process process in this.processList) {
+      arrivalTimeList.add(process.arrival_time);
+      burstTimeList.add(process.burst_time);
     }
+    arrivalTimeList.sort();
+    burstTimeList.sort();
+    
     // sort the process list on the basis of arrival time and burst time
     sortProcessList('both');
   }
@@ -28,6 +38,9 @@ class SRTF extends Algorithm {
 
   @override
   void Execute() {
+    for (Process process in this.processList) {
+      process.temp_burst_time = process.burst_time;
+    }
     for (int arrival_time in arrivalTimeList) {
       for (int burst_time in burstTimeList) {
         if (burst_time == 0) continue;

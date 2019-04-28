@@ -62,22 +62,70 @@ void main() {
   }
   // else execute the scheduling algorithms
   else {
-    // executing scheduling algorithms
     FCFS fcfs = FCFS(processList); // create an object of FCFS algorithm
     SJF sjf = SJF(processList); // create an object of SJF algorithm
     SRTF srtf = SRTF(processList); // create an object of SRTF algorithm
     RR rr = RR(processList, time_quantum); // create an object of RR algorithm
-    
+
+    List<double> alogrithmWaitTime = [];
+    // executing all scheduling algorithms
     fcfs.Execute();
-    fcfs.printGanttChart();
-
+    double fcfs_wt = fcfs.avg_waiting_time;
+    alogrithmWaitTime.add(fcfs_wt);
     sjf.Execute();
-    sjf.printGanttChart();
-
-    // srtf.Execute();
-    // srtf.printGanttChart();
-
+    double sjf_wt = sjf.avg_waiting_time;
+    alogrithmWaitTime.add(sjf_wt);
+    srtf.Execute();
+    double srtf_wt = srtf.avg_waiting_time;
+    alogrithmWaitTime.add(srtf_wt);
     rr.Execute();
-    rr.printGanttChart();
+    double rr_wt = rr.avg_waiting_time;
+    alogrithmWaitTime.add(rr_wt);
+
+    alogrithmWaitTime.sort();
+
+    if (fcfs_wt == alogrithmWaitTime[0]) {
+      print("Best Algorithm : FCFS");
+      FCFS temp_fcfs = FCFS(processList);
+      temp_fcfs.Execute();
+      temp_fcfs.printGanttChart();
+    } else if (sjf_wt == alogrithmWaitTime[0]) {
+      print("Best Algorithm : SJF");
+      SJF temp_sjf = SJF(processList);
+      temp_sjf.Execute();
+      temp_sjf.printGanttChart();
+    } else if (srtf_wt == alogrithmWaitTime[0]) {
+      print("Best Algorithm : SRTF");
+      SRTF temp_srtf = SRTF(processList);
+      temp_srtf.Execute();
+      temp_srtf.printGanttChart();
+    } else if (rr_wt == alogrithmWaitTime[0]) {
+      print("Best Algorithm : RR");
+      RR temp_rr = RR(processList, time_quantum);
+      temp_rr.Execute();
+      temp_rr.printGanttChart();
+    }
+
+    print("\n\nOther Algorithms");
+    if (fcfs_wt != alogrithmWaitTime[0]) {
+      FCFS temp_fcfs = FCFS(processList);
+      temp_fcfs.Execute();
+      print("FCFS : avg_turnaround_time = ${temp_fcfs.avg_turnaround_time.toStringAsFixed(3)}\tavg_waiting_time = ${temp_fcfs.avg_waiting_time.toStringAsFixed(3)}");
+    }
+    if (sjf_wt != alogrithmWaitTime[0]) {
+      SJF temp_sjf = SJF(processList);
+      temp_sjf.Execute();
+      print("SJF : avg_turnaround_time = ${temp_sjf.avg_turnaround_time.toStringAsFixed(3)}\tavg_waiting_time = ${temp_sjf.avg_waiting_time.toStringAsFixed(3)}");
+    }
+    if (srtf_wt != alogrithmWaitTime[0]) {
+      SRTF temp_srtf = SRTF(processList);
+      temp_srtf.Execute();
+      print("SRTF : avg_turnaround_time = ${temp_srtf.avg_turnaround_time.toStringAsFixed(3)}\tavg_waiting_time = ${temp_srtf.avg_waiting_time.toStringAsFixed(3)}");
+    }
+    if (rr_wt != alogrithmWaitTime[0]) {
+      RR temp_rr = RR(processList, time_quantum);
+      temp_rr.Execute();
+      print("RR : avg_turnaround_time = ${temp_rr.avg_turnaround_time.toStringAsFixed(3)}\tavg_waiting_time = ${temp_rr.avg_waiting_time.toStringAsFixed(3)}");
+    }
   }
 }

@@ -1,14 +1,24 @@
 import 'dart:collection';
 
 import '../models/process.dart';
+import '../models/process_queue.dart';
 import '../models/algorithm.dart';
 
-class RR extends Algorithm {
+class RR with Algorithm {
   int time_quantum;
-  RR(List<Process> processList, this.time_quantum) : super.fromProcessList(processList) {
-    for (Process process in super.processList) {
-      process.temp_burst_time = process.burst_time;
+  RR(List<Process> processList, this.time_quantum) {
+    this.processList = List.from(processList);
+    arrivalTimeList = List<int>();
+    burstTimeList = List<int>();
+    readyQueue = ProcessQueue();
+    runningQueue = ProcessQueue();
+    for (Process process in this.processList) {
+      arrivalTimeList.add(process.arrival_time);
+      burstTimeList.add(process.burst_time);
     }
+    arrivalTimeList.sort();
+    burstTimeList.sort();
+    
     // sort the process list on the basis of arrival time
     sortProcessList('arrival');
   }
@@ -29,6 +39,9 @@ class RR extends Algorithm {
 
   @override
   void Execute() {
+    for (Process process in this.processList) {
+      process.temp_burst_time = process.burst_time;
+    }
     for (int arrival_time in arrivalTimeList) {
       readyQueue.addProcessFromIterable(processList.where((Process process) {
         // find all the process's where arrival time is same, burst time is not 0 and ready queue doen't already contain it
